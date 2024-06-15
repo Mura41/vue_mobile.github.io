@@ -5,7 +5,7 @@ const { closeDrawer } = inject('cart')
 </script>
 
 <template>
-  <div class="flex items-center justify-between mb-4 sm:mb-8">
+  <div class="flex items-center justify-center mb-4 sm:mb-8">
     <svg
       @click="closeDrawer"
       class="w-6 h-6 sm:w-8 sm:h-8 opacity-30 cursor-pointer rotate-180 hover:opacity-100 transition hover:-translate-x-1"
@@ -28,17 +28,10 @@ const { closeDrawer } = inject('cart')
         stroke-linejoin="round"
       />
     </svg>
-    <h2 class="text-lg font-bold sm:text-2xl ml-0 sm:ml-2">Корзина</h2>
-    <!-- Добавлены классы ml-0 и sm:ml-2 для управления отступами -->
+    <h2 class="text-lg font-bold sm:text-2xl">Корзина</h2>
   </div>
 </template>
 
 <style scoped>
-.ml-0 {
-  margin-left: 0;
-}
 
-.sm\:ml-2 {
-  margin-left: 0.5rem; /* Подстройте значение отступа под ваш дизайн */
-}
 </style>
