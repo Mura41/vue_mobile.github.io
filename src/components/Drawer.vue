@@ -126,6 +126,6 @@ const buttonDisabled = computed(
 }
 
 .max-h-96 {
-  max-height: 24rem; /* Adjust height as needed */
+  max-height: 24rem; 
 }
 </style>
