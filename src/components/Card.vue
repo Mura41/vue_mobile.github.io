@@ -4,7 +4,7 @@
       <img
         :src="isFavorite ? '/like-2.svg' : '/like-1.svg'"
         alt="Favorite"
-        @click="$emit('onClickFavorite')"
+        @click="toggleFavorite"
         class="favorite-icon"
       />
     </div>
@@ -15,7 +15,7 @@
       <img
         :src="isAdded ? '/checked.svg' : '/plus.svg'"
         alt="Add to cart"
-        @click="$emit('onClickAdd')"
+        @click="toggleAddToCart"
         class="add-to-cart-icon"
       />
     </div>
@@ -31,6 +31,14 @@ export default {
     price: Number,
     isFavorite: Boolean,
     isAdded: Boolean
+  },
+  methods: {
+    toggleFavorite() {
+      this.$emit('onClickFavorite', this.id)
+    },
+    toggleAddToCart() {
+      this.$emit('onClickAdd', this.id)
+    }
   }
 }
 </script>
