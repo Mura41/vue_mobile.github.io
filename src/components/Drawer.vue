@@ -116,58 +116,7 @@ const buttonDisabled = computed(
   </div>
 </template>
 
-<script setup>
-import axios from 'axios'
-import { ref, computed, inject } from 'vue'
 
-import DrawerHead from './DrawerHead.vue'
-import CartItemList from './CartItemList.vue'
-import InfoBlock from './InfoBlock.vue'
-
-const props = defineProps({
-  totalPrice: Number,
-  vatPrice: Number
-})
-
-const { cart } = inject('cart')
-
-const isCreating = ref(false)
-const orderId = ref(null)
-
-// Поля для ввода данных пользователя
-const name = ref('')
-const email = ref('')
-const phone = ref('')
-
-const createOrder = async () => {
-  try {
-    isCreating.value = true
-
-    const { data } = await axios.post('https://ed773693ede49f2e.mokky.dev/orders', {
-      items: cart.value,
-      totalPrice: props.totalPrice,
-      customer: {
-        name: name.value,
-        email: email.value,
-        phone: phone.value
-      }
-    })
-
-    cart.value = []
-
-    orderId.value = data.id
-  } catch (err) {
-    console.log(err)
-  } finally {
-    isCreating.value = false
-  }
-}
-
-const cartIsEmpty = computed(() => cart.length === 0)
-const buttonDisabled = computed(
-  () => isCreating.value || cartIsEmpty.value || !name.value || !email.value || !phone.value
-)
-</script>
 
 <style scoped>
 .input-field {
