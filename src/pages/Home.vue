@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watch, ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import axios from 'axios'
 import debounce from 'lodash.debounce'
 import { inject } from 'vue'
@@ -9,7 +9,7 @@ const { cart, addToCart, removeFromCart } = inject('cart')
 
 const items = ref([])
 
-const filters = reactive({
+const filters = ref({
   sortBy: 'title',
   searchQuery: ''
 })
@@ -23,11 +23,11 @@ const onClickAddPlus = (item) => {
 }
 
 const onChangeSelect = (event) => {
-  filters.sortBy = event.target.value
+  filters.value.sortBy = event.target.value
 }
 
 const onChangeSearchInput = debounce((event) => {
-  filters.searchQuery = event.target.value
+  filters.value.searchQuery = event.target.value
 }, 300)
 
 const addToFavorite = async (item) => {
@@ -77,11 +77,11 @@ const fetchFavorites = async () => {
 const fetchItems = async () => {
   try {
     const params = {
-      sortBy: filters.sortBy
+      sortBy: filters.value.sortBy
     }
 
-    if (filters.searchQuery) {
-      params.title = `*${filters.searchQuery}*`
+    if (filters.value.searchQuery) {
+      params.title = `*${filters.value.searchQuery}*`
     }
 
     const { data } = await axios.get(`https://ed773693ede49f2e.mokky.dev/items`, {
@@ -92,7 +92,7 @@ const fetchItems = async () => {
       ...obj,
       isFavorite: false,
       favoriteId: null,
-      isAdded: false
+      isAdded: cart.value.some((cartItem) => cartItem.id === obj.id)
     }))
   } catch (err) {
     console.log(err)
@@ -105,11 +105,6 @@ onMounted(async () => {
 
   await fetchItems()
   await fetchFavorites()
-
-  items.value = items.value.map((item) => ({
-    ...item,
-    isAdded: cart.value.some((cartItem) => cartItem.id === item.id)
-  }))
 })
 
 watch(cart, () => {
@@ -119,7 +114,7 @@ watch(cart, () => {
   }))
 })
 
-watch(filters, fetchItems)
+watch(filters.value, fetchItems)
 </script>
 
 <template>
@@ -151,7 +146,7 @@ watch(filters, fetchItems)
       @addToFavorite="addToFavorite"
       @removeFromFavorite="addToFavorite"
       @addToCart="onClickAddPlus"
-      @removeaddToCard="onClickAddChecked"
+      @removeFromCart="onClickAddPlus"
     />
   </div>
 </template>
@@ -159,4 +154,3 @@ watch(filters, fetchItems)
 <style scoped>
 /* Остальные стили остаются без изменений */
 </style>
-
