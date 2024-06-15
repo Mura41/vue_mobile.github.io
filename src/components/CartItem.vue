@@ -10,7 +10,7 @@
           <span>{{ quantity }}</span>
           <button @click="increaseQuantity" class="quantity-button">+</button>
           <img
-            @click="() => emit('onClickRemove', item)"
+            @click="handleRemove"
             class="opacity-40 hover:opacity-200 cursor-pointer transition"
             src="/close.svg"
           />
@@ -21,9 +21,7 @@
 </template>
 
 <script setup>
-import { inject, defineProps, defineEmits } from 'vue'
-
-const { increaseItemQuantity, decreaseItemQuantity } = inject('cart')
+import { defineProps, defineEmits } from 'vue'
 
 const props = defineProps({
   id: Number,
@@ -36,17 +34,23 @@ const props = defineProps({
 const emit = defineEmits(['onClickRemove'])
 
 const increaseQuantity = () => {
-  increaseItemQuantity(props.id)
+  emit('increaseQuantity', props.id)
 }
 
 const decreaseQuantity = () => {
-  decreaseItemQuantity(props.id)
+  if (props.quantity > 1) {
+    emit('decreaseQuantity', props.id)
+  }
+}
+
+const handleRemove = () => {
+  emit('onClickRemove')
 }
 </script>
 
 <style scoped>
 .quantity-button {
-  background-color: #4caf50;
+  background-color: #4caf50; /* Green */
   border: none;
   color: white;
   padding: 5px 10px;
