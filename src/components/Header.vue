@@ -1,22 +1,19 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useUserStore } from '../userStore'
 import { defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 
-// Определение свойств и событий
 const props = defineProps({
   totalPrice: Number
 })
 
 const emit = defineEmits(['openDrawer'])
 
-// Подключение к userStore
 const userStore = useUserStore()
 const userName = computed(() => userStore.userName)
 const isLoggedIn = computed(() => !!userStore.userName)
 
-// Управление состоянием меню профиля
 const isProfileMenuOpen = ref(false)
 const router = useRouter()
 
@@ -31,6 +28,10 @@ const editProfile = () => {
 const logout = () => {
   userStore.logout()
 }
+
+watchEffect(() => {
+  console.log('UserName changed:', userName.value)
+})
 </script>
 
 <template>
