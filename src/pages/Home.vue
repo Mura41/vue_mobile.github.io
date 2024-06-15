@@ -123,35 +123,91 @@ watch(filters, fetchItems)
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold mb-8">Все товары</h2>
+  <div class="flex flex-col items-center">
+    <h2 class="text-3xl font-bold mt-8 mb-4">Все товары</h2>
 
-    <div class="flex gap-4">
-      <select @change="onChangeSelect" class="py-2 px-3 border rounded-md outline-none">
+    <div class="w-full px-4 mb-4">
+      <select @change="onChangeSelect" class="w-full py-2 px-3 border rounded-md outline-none">
         <option value="name">По названию</option>
         <option value="price">По цене (дешевые)</option>
         <option value="-price">По цене (дорогие)</option>
       </select>
+    </div>
 
-      <div class="relative">
-        <img class="absolute left-4 top-3" src="/search.svg" />
-        <input
-          @input="onChangeSearchInput"
-          class="border rounded-md py-2 pl-11 pr-4 outline-none focus:border-gray-400"
-          type="text"
-          placeholder="Поиск..."
-        />
-      </div>
+    <div class="relative w-full mb-8">
+      <img class="absolute left-4 top-3" src="/search.svg" />
+      <input
+        @input="onChangeSearchInput"
+        class="w-full border rounded-md py-2 pl-11 pr-4 outline-none focus:border-gray-400"
+        type="text"
+        placeholder="Поиск..."
+      />
+    </div>
+
+    <div class="w-full">
+      <CardList
+        :items="items"
+        @addToFavorite="addToFavorite"
+        @removeFromFavorite="addToFavorite"
+        @addToCart="onClickAddPlus"
+      />
     </div>
   </div>
-
-  <div class="mt-10">
-    <CardList
-      :items="items"
-      @addToFavorite="addToFavorite"
-      @removeFromFavorite="addToFavorite"
-      @addToCart="onClickAddPlus"
-      @removeaddToCard="onClickAddChecked"
-    />
-  </div>
 </template>
+
+<style scoped>
+/* Стили для мобильных устройств */
+@media screen and (max-width: 640px) {
+  .text-3xl {
+    font-size: 2rem; /* Уменьшение размера заголовка */
+    margin-top: 4px; /* Уменьшение отступа сверху */
+  }
+
+  .mb-8 {
+    margin-bottom: 2rem; /* Увеличение отступа снизу */
+  }
+
+  .px-4 {
+    padding-left: 1rem; /* Уменьшение внутренних отступов */
+    padding-right: 1rem;
+  }
+
+  .mb-4 {
+    margin-bottom: 1.5rem; /* Увеличение отступа снизу */
+  }
+
+  .w-full {
+    width: 100%; /* Растягивание элемента на всю ширину экрана */
+  }
+
+  .absolute {
+    left: 1rem; /* Позиционирование левой иконки поиска */
+    top: 0.75rem;
+  }
+
+  .border {
+    border-width: 1px; /* Увеличение толщины границы */
+  }
+
+  .py-2 {
+    padding-top: 0.5rem; /* Уменьшение вертикальных внутренних отступов */
+    padding-bottom: 0.5rem;
+  }
+
+  .pl-11 {
+    padding-left: 2.75rem; /* Увеличение внутренних отступов слева */
+  }
+
+  .pr-4 {
+    padding-right: 1rem; /* Уменьшение внутренних отступов справа */
+  }
+
+  .outline-none {
+    outline: none; /* Удаление обводки при фокусе */
+  }
+
+  .focus:border-gray-400:focus {
+    border-color: #cbd5e0; /* Цвет обводки при фокусе */
+  }
+}
+</style>
