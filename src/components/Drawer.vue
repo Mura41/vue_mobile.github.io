@@ -54,7 +54,7 @@ const buttonDisabled = computed(
 <template>
   <div>
     <div class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>
-    <div class="bg-white w-96 fixed right-0 top-0 z-20 p-8 overflow-y-auto">
+    <div class="bg-white w-96 fixed right-0 top-0 z-20 p-8">
       <DrawerHead />
 
       <div v-if="cartIsEmpty && !orderId" class="flex h-full items-center">
@@ -71,8 +71,10 @@ const buttonDisabled = computed(
           image-url="/order-success-icon.png"
         />
       </div>
-      <div v-else>
-        <CartItemList />
+      <div v-else class="flex flex-col h-full">
+        <div class="overflow-y-auto flex-1">
+          <CartItemList />
+        </div>
         <div class="flex flex-col gap-4 mt-7">
           <div class="flex flex-col gap-4">
             <label>
@@ -174,6 +176,11 @@ const buttonDisabled = computed(
   margin: 4px 0;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+  max-height: calc(100% - 250px); /* Adjust height as needed */
 }
 </style>
 
