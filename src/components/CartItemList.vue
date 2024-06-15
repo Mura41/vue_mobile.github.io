@@ -15,9 +15,9 @@ const { cart, removeFromCart, increaseItemQuantity, decreaseItemQuantity } = inj
       :price="item.price"
       :image-url="item.imageUrl"
       :quantity="item.quantity"
-      @on-click-remove="removeFromCart"
-      @increase-quantity="increaseItemQuantity"
-      @decrease-quantity="decreaseItemQuantity"
+      @onClickRemove="() => removeFromCart(item)"
+      @increaseQuantity="increaseItemQuantity(item.id)"
+      @decreaseQuantity="decreaseItemQuantity(item.id)"
     />
   </div>
 </template>
