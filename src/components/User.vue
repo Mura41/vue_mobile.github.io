@@ -58,21 +58,37 @@ const router = useRouter()
 const username = ref('')
 const email = ref('')
 const password = ref('')
+const isLogin = ref(false)
+
+const toggleMode = () => {
+  isLogin.value = !isLogin.value
+}
 
 const registerUser = async () => {
   try {
     // Логика регистрации пользователя на вашем сервере
-    // Предположим, что вы успешно зарегистрировали пользователя и получили его имя
+    // Пример для демонстрации
+    // При успешной регистрации вызываем login с именем пользователя
+    userStore.login(username.value)
 
-    const registeredUsername = '...' // Полученное имя пользователя после регистрации
-
-    // Вызов метода login вашего магазина пользователя и передача имени пользователя
-    userStore.login(registeredUsername)
-
-    // Перенаправление на главную страницу или другую страницу после успешной регистрации
+    // Перенаправление на главную страницу после успешной регистрации
     router.push('/')
   } catch (error) {
     console.error('Ошибка при регистрации:', error)
+  }
+}
+
+const loginUser = async () => {
+  try {
+    // Логика входа пользователя на вашем сервере
+    // Пример для демонстрации
+    // При успешном входе вызываем login с именем пользователя
+    userStore.login(username.value)
+
+    // Перенаправление на главную страницу после успешного входа
+    router.push('/')
+  } catch (error) {
+    console.error('Ошибка при входе:', error)
   }
 }
 </script>
