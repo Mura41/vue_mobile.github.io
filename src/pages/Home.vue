@@ -123,21 +123,21 @@ watch(filters, fetchItems)
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold mb-8">Все товары</h2>
+  <div class="flex justify-between items-center flex-col md:flex-row"> <!-- Для мобильных: столбец, для больших экранов: строка -->
+    <h2 class="text-3xl font-bold mb-8 md:mb-0">Все товары</h2> <!-- Оставляем отступ только для больших экранов -->
 
-    <div class="flex gap-4">
-      <select @change="onChangeSelect" class="py-2 px-3 border rounded-md outline-none">
+    <div class="flex gap-4 w-full md:w-auto"> <!-- Расстояние между элементами. На мобильных все элементы располагаются в одну строку -->
+      <select @change="onChangeSelect" class="py-2 px-3 border rounded-md outline-none w-full md:w-auto">
         <option value="name">По названию</option>
         <option value="price">По цене (дешевые)</option>
         <option value="-price">По цене (дорогие)</option>
       </select>
 
-      <div class="relative">
-        <img class="absolute left-4 top-3" src="/search.svg" />
+      <div class="relative flex-1 md:flex-initial"> <!-- Расстояние от правого края, слева поиск и остается место для селектора на больших экранах -->
+        <img class="absolute left-4 top-3 w-4 md:w-auto" src="/search.svg" />
         <input
           @input="onChangeSearchInput"
-          class="border rounded-md py-2 pl-11 pr-4 outline-none focus:border-gray-400"
+          class="border rounded-md py-2 pl-11 pr-4 outline-none focus:border-gray-400 w-full md:w-auto"
           type="text"
           placeholder="Поиск..."
         />
@@ -155,3 +155,8 @@ watch(filters, fetchItems)
     />
   </div>
 </template>
+
+<style scoped>
+/* Остальные стили остаются без изменений */
+</style>
+
