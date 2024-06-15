@@ -50,6 +50,10 @@ export default {
   margin: 8px;
   text-align: center;
   position: relative;
+  transition: box-shadow 0.3s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .card-header {
   position: absolute;
@@ -83,5 +87,24 @@ export default {
   cursor: pointer;
   width: 24px;
   height: 24px;
+}
+
+/* Адаптивный дизайн */
+@media screen and (max-width: 768px) {
+  .card {
+    margin: 16px 0;
+  }
+  .product-image {
+    margin-bottom: 8px;
+  }
+  .buttons {
+    position: static;
+    margin-top: 16px;
+  }
+  .favorite-icon,
+  .add-to-cart-icon {
+    width: 32px;
+    height: 32px;
+  }
 }
 </style>
