@@ -28,10 +28,17 @@ const { closeDrawer } = inject('cart')
         stroke-linejoin="round"
       />
     </svg>
-    <h2 class="text-lg font-bold sm:text-2xl">Корзина</h2>
+    <h2 class="text-lg font-bold sm:text-2xl ml-0 sm:ml-2">Корзина</h2>
+    <!-- Добавлены классы ml-0 и sm:ml-2 для управления отступами -->
   </div>
 </template>
 
 <style scoped>
-/* Добавьте свои стили здесь */
+.ml-0 {
+  margin-left: 0;
+}
+
+.sm\:ml-2 {
+  margin-left: 0.5rem; /* Подстройте значение отступа под ваш дизайн */
+}
 </style>
