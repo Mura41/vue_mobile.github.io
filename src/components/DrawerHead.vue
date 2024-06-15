@@ -6,10 +6,9 @@ const { closeDrawer } = inject('cart')
 
 <template>
   <div class="flex items-center justify-between mb-4 sm:mb-8">
-    <h2 class="text-lg font-bold sm:text-2xl text-center flex-1">Корзина</h2> <!-- flex-1 для занимает всего доступного пространства -->
     <svg
       @click="closeDrawer"
-      class="w-6 h-6 sm:w-8 sm:h-8 opacity-30 cursor-pointer rotate-180 hover:opacity-100 transition hover:-translate-x-1 ml-4 sm:ml-0" <!-- ml-4 чтобы создать отступ между стрелкой и текстом "Корзина" -->
+      class="w-8 h-8 sm:w-10 sm:h-10 opacity-30 cursor-pointer rotate-180 hover:opacity-100 transition hover:-translate-x-1 ml-2 sm:ml-4"
       viewBox="0 0 16 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -29,9 +28,13 @@ const { closeDrawer } = inject('cart')
         stroke-linejoin="round"
       />
     </svg>
+    <h2 class="text-lg font-bold sm:text-2xl text-center flex-1">Корзина</h2>
+   
   </div>
 </template>
 
 <style scoped>
-/* Дополнительные стили, если требуется */
+.rotate-180 {
+  transform: rotate(180deg); 
+}
 </style>
