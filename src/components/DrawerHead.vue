@@ -5,12 +5,10 @@ const { closeDrawer } = inject('cart')
 </script>
 
 <template>
-  <div class="flex items-center gap-5 mb-8">
+  <div class="flex items-center justify-between mb-4 sm:mb-8">
     <svg
       @click="closeDrawer"
-      class="opacity-30 cursor-pointer rotate-180 hover:opacity-100 transition hover:-translate-x-1"
-      width="16"
-      height="14"
+      class="w-6 h-6 sm:w-8 sm:h-8 opacity-30 cursor-pointer rotate-180 hover:opacity-100 transition hover:-translate-x-1"
       viewBox="0 0 16 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -30,6 +28,10 @@ const { closeDrawer } = inject('cart')
         stroke-linejoin="round"
       />
     </svg>
-    <h2 class="text-2xl font-bold">Корзина</h2>
+    <h2 class="text-lg font-bold sm:text-2xl">Корзина</h2>
   </div>
 </template>
+
+<style scoped>
+/* Добавьте свои стили здесь */
+</style>
