@@ -151,6 +151,7 @@ watch(filters, fetchItems)
       @addToFavorite="addToFavorite"
       @removeFromFavorite="addToFavorite"
       @addToCart="onClickAddPlus"
+      @removeaddToCard="onClickAddChecked"
     />
   </div>
 </template>
