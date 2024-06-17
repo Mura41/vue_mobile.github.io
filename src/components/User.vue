@@ -84,14 +84,5 @@ const registerUser = async () => {
 const loginUser = async () => {
   try {
     const response = await axios.get(`https://ed773693ede49f2e.mokky.dev/users/${username.value}`)
-    if (response.data) {
-      userStore.login(username.value)
-      router.push('/')
-    } else {
-      console.error('Пользователь не найден')
-    }
-  } catch (error) {
-    console.error('Ошибка при входе:', error)
-  }
-}
+    
 </script>
