@@ -40,9 +40,9 @@
       </button>
     </form>
     <p class="mt-4">
-      <a @click="toggleMode" class="text-indigo-600 cursor-pointer">
-        {{ isLogin ? 'Нет аккаунта? Зарегистрируйтесь' : 'Уже есть аккаунт? Войдите' }}
-      </a>
+      <a @click="toggleMode" class="text-indigo-600 cursor-pointer">{{
+        isLogin ? 'Нет аккаунта? Зарегистрируйтесь' : 'Уже есть аккаунт? Войдите'
+      }}</a>
     </p>
   </div>
 </template>
@@ -51,6 +51,7 @@
 import { ref } from 'vue'
 import { useUserStore } from '../userStore'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -66,12 +67,14 @@ const toggleMode = () => {
 
 const registerUser = async () => {
   try {
-    // Логика регистрации пользователя на вашем сервере
-    // Пример для демонстрации
-    // При успешной регистрации вызываем login с именем пользователя
+    await axios.post('https://ed773693ede49f2e.mokky.dev/users', {
+      username: username.value,
+      email: email.value,
+      password: password.value,
+      favorites: [],
+      cart: []
+    })
     userStore.login(username.value)
-
-    // Перенаправление на главную страницу после успешной регистрации
     router.push('/')
   } catch (error) {
     console.error('Ошибка при регистрации:', error)
@@ -80,13 +83,13 @@ const registerUser = async () => {
 
 const loginUser = async () => {
   try {
-    // Логика входа пользователя на вашем сервере
-    // Пример для демонстрации
-    // При успешном входе вызываем login с именем пользователя
-    userStore.login(username.value)
-
-    // Перенаправление на главную страницу после успешного входа
-    router.push('/')
+    const response = await axios.get(`https://ed773693ede49f2e.mokky.dev/users/${username.value}`)
+    if (response.data) {
+      userStore.login(username.value)
+      router.push('/')
+    } else {
+      console.error('Пользователь не найден')
+    }
   } catch (error) {
     console.error('Ошибка при входе:', error)
   }
